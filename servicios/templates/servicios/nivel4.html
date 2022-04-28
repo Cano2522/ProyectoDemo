@@ -4,7 +4,8 @@
 
 {% block content %}
 
-
+    {% include "barra_busqueda/busqueda.html" %}
+    
     <div class="card-footer text-center" style="position: absolute; left: 1; ">
         <a href="{% url 'nivel3' nivel_ant nivel_ant_ant %}" class="btn btn-sm btn-secondary">Nivel anterior</a>
     </div>
