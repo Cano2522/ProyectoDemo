@@ -17,18 +17,30 @@ def servicios(request):
     return render(request, "servicios/servicios.html", {"UFTCategorias": UFTCategoriasList})
 
 def nivel2(request, nivel1_id):
-
+    queryset = request.GET.get('buscar')
     nivels2 = UFTNivel2.objects.filter(fk_UftCat=nivel1_id)
+    if queryset:
+        nivels2 = UFTNivel2.objects.filter( 
+            Q(Codigo__icontains = queryset) | Q(descriSpa__icontains = queryset), fk_UftCat=nivel1_id
+        ).distinct()
     return render(request, "servicios/nivel2.html", {"UFTNivels2":nivels2,"nivel2_id": nivel1_id})
 
 def nivel3(request, nivel2_id, nivel_ant):
-
+    queryset = request.GET.get('buscar')
     nivels3 = UFTNivel3.objects.filter(fk_UftN2=nivel2_id)
+    if queryset:
+        nivels3 = UFTNivel3.objects.filter( 
+            Q(Codigo__icontains = queryset) | Q(descriSpa__icontains = queryset), fk_UftN2=nivel2_id
+        ).distinct()
     return render(request, "servicios/nivel3.html", {"UFTNivels3":nivels3,"nivel3_id": nivel2_id, "nivel_ant": nivel_ant})
 
 def nivel4(request, nivel3_id, nivel_ant, nivel_ant_ant):
-
+    queryset = request.GET.get('buscar')
     nivels4 = UFTNivel4.objects.filter(fk_UftN3=nivel3_id)
+    if queryset:
+        nivels4 = UFTNivel4.objects.filter( 
+            Q(Codigo__icontains = queryset) | Q(descriSpa__icontains = queryset), fk_UftN3=nivel3_id
+        )
     return render(request, "servicios/nivel4.html", {"UFTNivels4":nivels4,"nivel4_id": nivel3_id, "nivel_ant": nivel_ant, "nivel_ant_ant": nivel_ant_ant})
 
 def agregarCategoria(request):
