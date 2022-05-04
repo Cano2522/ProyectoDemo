@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from servicios.models import UFTCategorias, UFTNivel2, UFTNivel3, UFTNivel4
 from servicios.forms import UFTCategoriaForm, UFTNivel2Form, UFTNivel3Form, UFTNivel4Form
 from django.db.models import Q
+from django.contrib import messages
 
 
 # Create your views here.
@@ -48,6 +49,7 @@ def agregarCategoria(request):
         formaCategoria = UFTCategoriaForm(request.POST)
         if formaCategoria.is_valid():
             formaCategoria.save()
+            messages.success(request, 'Se agrego con exito!')
             return redirect('Servicios')
     else:
         formaCategoria = UFTCategoriaForm()
@@ -60,6 +62,7 @@ def editarCategoria(request, id):
         formaCategoria = UFTCategoriaForm(request.POST, instance=categoria)
         if formaCategoria.is_valid():
             formaCategoria.save()
+            messages.info(request, 'Se edito con exito!')
             return redirect('Servicios')
     else:
         formaCategoria = UFTCategoriaForm(instance=categoria)
@@ -70,6 +73,7 @@ def eliminarCategoria(request, id):
     categoria = get_object_or_404(UFTCategorias, pk=id)
     if categoria:
         categoria.delete()
+        messages.info(request, 'Se elimino con exito!')
     return redirect('Servicios')
 
 #CRUD PARA EL NIVEL 2
@@ -79,6 +83,7 @@ def agregarNivel2(request, nivel1_id):
         formaNivel2 = UFTNivel2Form(request.POST)
         if formaNivel2.is_valid():
             formaNivel2.save()
+            messages.success(request, 'Se agrego con exito!')
             return redirect('nivel2', nivel1_id)
     else:
         formaNivel2 = UFTNivel2Form()
@@ -89,6 +94,7 @@ def eliminarNivel2(request, id, nivel1_id):
     nivel2 = get_object_or_404(UFTNivel2, pk=id)
     if nivel2:
         nivel2.delete()
+        messages.info(request, 'Se elimino con exito!')
     return redirect('nivel2', nivel1_id)
 
 def editarNivel2(request, id, nivel1_id):
@@ -97,6 +103,7 @@ def editarNivel2(request, id, nivel1_id):
         formaNivel2 = UFTNivel2Form(request.POST, instance=nivel2)
         if formaNivel2.is_valid():
             formaNivel2.save()
+            messages.info(request, 'Se edito con exito!')
             return redirect('nivel2', nivel1_id)
     else:
         formaNivel2 = UFTNivel2Form(instance=nivel2)
@@ -110,6 +117,7 @@ def agregarNivel3(request, nivel2_id, nivel1_id):
         formaNivel3 = UFTNivel3Form(request.POST)
         if formaNivel3.is_valid():
             formaNivel3.save()
+            messages.success(request, 'Se agrego con exito!')
             return redirect('nivel3', nivel2_id, nivel1_id)
     else:
         formaNivel3 = UFTNivel3Form()
@@ -120,6 +128,7 @@ def eliminarNivel3(request, id, nivel2_id, nivel1_id):
     nivel3 = get_object_or_404(UFTNivel3, pk=id)
     if nivel3:
         nivel3.delete()
+        messages.info(request, 'Se elimino con exito!')
     return redirect('nivel3', nivel2_id, nivel1_id)
 
 def editarNivel3(request, id, nivel2_id, nivel1_id):
@@ -128,6 +137,7 @@ def editarNivel3(request, id, nivel2_id, nivel1_id):
         formaNivel3 = UFTNivel3Form(request.POST, instance=nivel3)
         if formaNivel3.is_valid():
             formaNivel3.save()
+            messages.info(request, 'Se edito con exito!')
             return redirect('nivel3', nivel2_id, nivel1_id)
     else:
         formaNivel3 = UFTNivel3Form(instance=nivel3)
@@ -141,6 +151,7 @@ def agregarNivel4(request, nivel3_id, nivel2_id, nivel1_id):
         formaNivel4 = UFTNivel4Form(request.POST)
         if formaNivel4.is_valid():
             formaNivel4.save()
+            messages.success(request, 'Se agrego con exito!')
             return redirect('nivel4', nivel3_id, nivel2_id, nivel1_id)
     else:
         formaNivel4 = UFTNivel4Form()
@@ -151,6 +162,7 @@ def eliminarNivel4(request, id, nivel3_id, nivel2_id, nivel1_id):
     nivel4 = get_object_or_404(UFTNivel4, pk=id)
     if nivel4:
         nivel4.delete()
+        messages.info(request, 'Se elimino con exito!')
     return redirect('nivel4', nivel3_id, nivel2_id, nivel1_id)
 
 def editarNivel4(request, id, nivel3_id, nivel2_id, nivel1_id):
@@ -159,6 +171,7 @@ def editarNivel4(request, id, nivel3_id, nivel2_id, nivel1_id):
         formaNivel4 = UFTNivel4Form(request.POST, instance=nivel4)
         if formaNivel4.is_valid():
             formaNivel4.save()
+            messages.info(request, 'Se edito con exito!')
             return redirect('nivel4', nivel3_id, nivel2_id, nivel1_id)
     else:
         formaNivel4 = UFTNivel4Form(instance=nivel4)

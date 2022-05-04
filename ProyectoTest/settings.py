@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,3 +141,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 #configuracion cripsy 
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
+
+#CONFIGURACION PARA LAS VENTANAS EMERGENTES
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-primary',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-secondary',
+    messages.ERROR: 'alert-danger',
+}
